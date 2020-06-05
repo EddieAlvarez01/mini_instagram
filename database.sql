@@ -61,3 +61,15 @@ CREATE TABLE Likes(
     CONSTRAINT fk_likes_image FOREIGN KEY(image_id) REFERENCES Image(id),
     CONSTRAINT fk_likes_user FOREIGN KEY(user_id) REFERENCES User(id)
 )ENGINE=InnoDB;
+
+/*ROLES*/
+INSERT INTO Role(name)
+VALUES('usuario');
+INSERT INTO Role(name)
+VALUES('administrador');
+
+/*USUARIO POR DEFECTO ADMINISTRADOR*/
+INSERT INTO User(role_id, name, surname, email, nickname, password, image, created_at, updated_at, remember_token)
+SELECT id, 'admin', 'admin', 'admin@admin', 'admin', 'admin', '', NOW(), NOW(), null 
+FROM Role
+WHERE name = 'administrador';
