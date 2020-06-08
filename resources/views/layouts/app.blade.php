@@ -10,7 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Mini Instagram</title>
 
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
@@ -28,18 +28,18 @@
 <body>
     @yield('content')
 
-    <!-- Footer
-    ================================================= -->
-    <footer id="footer">
-        <div class="copyright">
-            <p>Thunder Team ?2016. All rights reserved</p>
-        </div>
-    </footer>
-
     <!--preloader-->
     <div id="spinner-wrapper">
         <div class="spinner"></div>
     </div>
+
+    <!-- Footer
+    ================================================= -->
+    <footer id="footer">
+        <div class="copyright">
+            <p>Pagina creada por Eddie Alvarez &copy;</p>
+        </div>
+    </footer>
 
     <!-- Scripts
         ================================================= -->

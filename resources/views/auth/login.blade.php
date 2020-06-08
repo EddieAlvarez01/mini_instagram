@@ -1,127 +1,104 @@
 @extends('layouts.app')
-<div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
+@section('content')
+    <!-- Landing Page Contents
+        ================================================= -->
+    <div id="lp-register">
+        <div class="container wrapper">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-1">
+                    <div class="reg-form-container">
 
-                </ul>
+                        <!-- Register/Login Tabs-->
+                        <div class="reg-options">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#register" data-toggle="tab">Registrarse</a></li>
+                                <li class="active"><a href="#login" data-toggle="tab">Iniciar Sesión</a></li>
+                            </ul><!--Tabs End-->
+                        </div>
 
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                        <!--Registration Form Contents-->
+                        <div class="tab-content">
+                            <div class="tab-pane" id="register">
+                                <h3>Registrate ahora!!</h3>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <!--Register Form-->
+                                <form name="registration_form" id='registration_form' class="form-inline" method="post" action="{{ route('register') }}">
                                     @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-        </div>
-    </nav>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <label for="firstname" class="sr-only">Primer Nombre</label>
+                                            <input id="name" class="form-control input-group-lg" type="text" name="name" title="Enter first name" placeholder="Primer nombre" required autofocus/>
+                                        </div>
+                                        <div class="form-group col-xs-6">
+                                            <label for="lastname" class="sr-only">Primer Apellido</label>
+                                            <input id="surname" class="form-control input-group-lg" type="text" name="surname" title="Enter last name" placeholder="Segundo nombre" required/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="email" class="sr-only">Correo</label>
+                                            <input id="email" class="form-control input-group-lg" type="email" name="email" title="Enter Email" placeholder="Correo" required/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="nickname" class="sr-only">Nombre de usuario</label>
+                                            <input id="nickname" class="form-control input-group-lg" type="text" name="nickname" title="Enter password" placeholder="Nombre de Usuario" required/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="password" class="sr-only">Password</label>
+                                            <input id="password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Contraseña" required/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="password_confirmation" class="sr-only">Confirmar contrseña</label>
+                                            <input id="password_confirmation" class="form-control input-group-lg" type="password" name="password_confirmation" title="COnfirmar contraseña" placeholder="Confirmar contraseña" required/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <input class="btn btn-primary" type="submit" value="Registrarse"/>
+                                        </div>
+                                    </div>
+                                </form><!--Register Now Form Ends-->
+                            </div><!--Registration Form Contents Ends-->
 
-    <main class="py-4">
-        @yield('content')
-    </main>
-</div>
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                            <!--Login-->
+                            <div class="tab-pane active" id="login">
+                                <h3>Iniciar Sesión</h3>
+                                <p class="text-muted">Inicia sesión en tu cuenta</p>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+                                <!--Login Form-->
+                                <form name="Login_form" id='Login_form' method="post" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="my-nickname" class="sr-only">Nombre de usuario</label>
+                                            <input id="my-nickname" class="form-control input-group-lg" type="text" name="nickname" title="Introduce tu correo" value="{{ old('nickname') }}" placeholder="Nombre de usuario" required autofocus/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-12">
+                                            <label for="my-password" class="sr-only">Contraseña</label>
+                                            <input id="my-password" class="form-control input-group-lg" type="password" name="password" title="Ingresa tu contraseña" placeholder="Contraseña" required/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xs-6">
+                                            <input class="btn btn-primary" type="submit" value="Iniciar sesión"/>
+                                        </div>
+                                    </div>
+                                </form><!--Login Form Ends-->
+                                <p><a href="{{ route('password.request') }}">¿Olvido su contraseña?</a></p>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
