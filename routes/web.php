@@ -31,3 +31,11 @@ Route::get('/get-image/{path}/{option}', 'ImageController@getImage')->where([
 Route::group(['prefix' => 'image'], function (){
     Route::post('create', 'ImageController@createImage');
 });
+
+//RUTAS DE LOS COMENTARIOS
+Route::group(['prefix' => 'comment'], function (){
+    Route::post('create', 'CommentController@postComment');
+    Route::get('delete/{id}', 'CommentController@deleteComment')->where([
+        'id' => '[0-9]+'
+    ]);
+});

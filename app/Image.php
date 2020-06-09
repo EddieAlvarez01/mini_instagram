@@ -18,7 +18,7 @@ class Image extends Model
 
     //UNO A MUCHOS
     public function comments(){
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Comment')->orderBy('created_at', 'desc'); //ORDENARLOS DE MAS RECIENTE A MAS VIEJO
     }
 
     //LLAVES COMPUESTAS
