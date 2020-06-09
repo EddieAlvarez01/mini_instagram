@@ -13,8 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-use App\User;
-
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+//RUTAS DE EL USUSARIO
+Route::group(['prefix' => 'user'], function(){
+    Route::get('show-edit', 'UserController@showEdit');
+    Route::put('update-user', 'UserController@updateUser');
+});
+
+Route::get('/get-image/{path}', 'ImageController@getImage');
