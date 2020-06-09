@@ -23,4 +23,11 @@ Route::group(['prefix' => 'user'], function(){
     Route::put('update-user', 'UserController@updateUser');
 });
 
-Route::get('/get-image/{path}', 'ImageController@getImage');
+Route::get('/get-image/{path}/{option}', 'ImageController@getImage')->where([
+    'option' => '1|0'
+]);
+
+//RUTAS DE LAS IMAGENES SUBIDAS
+Route::group(['prefix' => 'image'], function (){
+    Route::post('create', 'ImageController@createImage');
+});

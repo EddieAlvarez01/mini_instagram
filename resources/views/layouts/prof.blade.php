@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="profile-info">
-                                <img src="{{ (\Illuminate\Support\Facades\Auth::user()->image == '') ? asset('images/user.svg') : action('ImageController@getImage', ['path' => $image_p]) }}" alt="" class="img-responsive profile-photo" />
+                                <img src="{{ (\Illuminate\Support\Facades\Auth::user()->image == '') ? asset('images/user.svg') : action('ImageController@getImage', ['path' => $image_p, 'option' => 1]) }}" alt="" class="img-responsive profile-photo" />
                                 <h3>{{ \Illuminate\Support\Facades\Auth::user()->nickname }}</h3>
                                 <p class="text-muted">{{ \Illuminate\Support\Facades\Auth::user()->name . ' ' . \Illuminate\Support\Facades\Auth::user()->surname }}</p>
                             </div>

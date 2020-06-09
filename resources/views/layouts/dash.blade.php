@@ -5,21 +5,7 @@
         <div class="container">
             <div class="row">
 
-                <!-- Newsfeed Common Side Bar Left
-          ================================================= -->
-                <div class="col-md-3 static">
-                    <div class="profile-card">
-                        <img src="{{ (\Illuminate\Support\Facades\Auth::user()->image == '') ? asset('images/user.svg') : action('ImageController@getImage', ['path' => \Illuminate\Support\Facades\Auth::user()->image]) }}" alt="user" class="profile-photo" />
-                        <h5><a href="timeline.html" class="text-white">{{ \Illuminate\Support\Facades\Auth::user()->nickname }}</a></h5>
-                    </div><!--profile card ends-->
-                    <ul class="nav-news-feed">
-                        <li><i class="icon ion-home"></i><div><a href="newsfeed-images.html">Inicio</a></div></li>
-                        <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Mis imágenes</a></div></li>
-                        <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">Mi perfil</a></div></li>
-                        <li><i class="icon ion-ios-settings"></i><div><a href="{{ action('UserController@showEdit') }}">Editar perfil</a></div></li>
-                        <li><i class="icon ion-ios-locked-outline"></i><div><a href="newsfeed-images.html">Cambiar contraseña</a></div></li>
-                    </ul><!--news-feed links ends-->
-                </div>
+                @include('layouts.sidebar.normal-sidebar')
 
                 <div class="col-md-7">
 
@@ -27,20 +13,29 @@
                     ================================================= -->
                     <div class="create-post">
                         <div class="row">
-                            <div class="col-md-7 col-sm-7">
-                                <div class="form-group">
-                                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
-                                    <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
+                            <form action="{{ action('ImageController@createImage') }}" method="post" name="form-publish" enctype="multipart/form-data">
+                                @csrf
+                                <div class="col-md-7 col-sm-7">
+                                    <div class="form-group">
+                                        <img src="{{ (\Illuminate\Support\Facades\Auth::user()->image == '') ? asset('images/user.svg') : action('ImageController@getImage', ['path' => \Illuminate\Support\Facades\Auth::user()->image, 'option' => 1]) }}" alt="user" class="profile-photo-md" />
+                                        <textarea name="description" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Descripción" required></textarea>
+                                        @error('description')
+                                            <strong class="error-validate">{{ $message }}</strong>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-5 col-sm-5">
-                                <div class="tools">
-                                    <ul class="publishing-tools list-inline">
-                                        <li><a href="#"><i class="ion-images"></i></a></li>
-                                    </ul>
-                                    <button class="btn btn-primary pull-right">Publish</button>
+                                <div class="col-md-5 col-sm-5">
+                                    <div class="tools">
+                                        <ul class="publishing-tools list-inline">
+                                            <li><a href="#" id="btnImage"><i class="ion-images"></i></a></li>
+                                        </ul>
+                                        <button type="submit" class="btn btn-primary pull-right">Publicar</button>
+                                    </div>
                                 </div>
-                            </div>
+                                @error('image')
+                                    <strong class="error-validate">{{ $message }}</strong>
+                                @enderror
+                            </form>
                         </div>
                     </div><!-- Post Create Box End -->
 

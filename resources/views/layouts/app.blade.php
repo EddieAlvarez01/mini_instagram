@@ -33,6 +33,8 @@
         <div class="spinner"></div>
     </div>
 
+    <form id="logout-f" action="{{ route('logout') }}" method="post">@csrf</form>
+
     <!-- Footer
     ================================================= -->
     <footer id="footer">
