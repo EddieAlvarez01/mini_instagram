@@ -39,3 +39,13 @@ Route::group(['prefix' => 'comment'], function (){
         'id' => '[0-9]+'
     ]);
 });
+
+//RUTAS DE LOS LIKES
+Route::group(['prefix' => 'like'], function (){
+    Route::get('like-post/{id}', 'LikeController@likePublication')->where([
+        'id' => '[0-9]+'
+    ]);
+    Route::get('dislike-post/{id}', 'LikeController@dislike')->where([
+        'id' => '[0-9]+'
+    ]);
+});
