@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Like;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
@@ -26,14 +27,15 @@ class LikeController extends Controller
             $like->image_id = $id;
             $like->user_id = Auth::id();
             $like->save();
+            return new Response('y', 200);
         }
-        return redirect()->action('HomeController@index');
+        return new Response('n', 400);
     }
 
     //QUITAR EL LIKE DE LA PUBLICACION
     public function dislike($id){
         Like::where([['image_id', '=', $id], ['user_id', '=', Auth::id()]])->delete();
-        return redirect()->action('HomeController@index');
+        return new Response('y', 200);
     }
 
 }

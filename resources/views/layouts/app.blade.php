@@ -51,6 +51,7 @@
     <script src="{{ asset('js/jquery.incremental-counter.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('js/alerts.js') }}"></script>
     <script>
         @if(session('alert-success'))

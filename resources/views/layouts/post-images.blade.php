@@ -8,16 +8,16 @@
                 <div class="reaction">
                     @foreach($image->likes as $like)
                         @if($like->image_id == $image->id && $like->user_id == \Illuminate\Support\Facades\Auth::id())
-                            <a class="btn text-green" href="{{ action('LikeController@dislike', ['id' => $image->id]) }}"><i class="fa fa-thumbs-up"></i> {{ count($image->likes) }}</a>
+                            <a class="btn text-green hand" id="btnLike" data-id="{{ $image->id }}"><i class="fa fa-thumbs-up"></i> {{ count($image->likes) }}</a>
                             <?php $isV = true; ?>
                             @break
                         @endif
                     @endforeach
                     @if(!isset($isV))
-                            <a class="btn " href="{{ action('LikeController@likePublication', ['id' => $image->id]) }}"><i class="fa fa-thumbs-up"></i> {{ count($image->likes) }}</a>
-                        @else
-                            <?php unset($isV); ?>
-                        @endif
+                            <a class="btn hand" id="btnLike" data-id="{{ $image->id }}"><i class="fa fa-thumbs-up"></i> {{ count($image->likes) }}</a>
+                    @else
+                        <?php unset($isV); ?>
+                    @endif
                 </div>
                 <div class="user-info">
                     <img src="{{ ($image->user->image != '') ? action('ImageController@getImage', ['path' => $image->user->image, 'option' => 1]) : asset('images/user.svg') }}" alt="" class="profile-photo-sm pull-left" />

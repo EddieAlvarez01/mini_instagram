@@ -2371,3 +2371,8 @@ ul.contact li i{
     background: red;
     color: white;
 }
+
+/* POINTER */
+.hand{
+    cursor: pointer;
+}
