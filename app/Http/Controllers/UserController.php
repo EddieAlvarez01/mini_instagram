@@ -62,4 +62,21 @@ class UserController extends Controller
                             ->with('alert-success', 'Cambios guardados exitosamente');
     }
 
+    //MOSTRAR PERFIL
+    public function showProfile($id){
+        if(Auth::id() == $id){
+            $image_p = Auth::user()->image;
+            $information = [
+                'id' => Auth::id(),
+                'name' => Auth::user()->name . ' ' . Auth::user()->surname,
+                'nickname' => Auth::user()->nickname,
+                'email' => Auth::user()->email
+            ];
+        }else{
+            $user = User::find($id);
+            $image_p = $user->image;
+        }
+        return view('profile.my', ['image_p' => $image_p, 'information' => $information]);
+    }
+
 }

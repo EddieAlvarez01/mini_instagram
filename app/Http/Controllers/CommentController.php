@@ -25,7 +25,7 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
         $comment->image_id = $req->input('img_id');
         $comment->save();
-        return redirect()->action('HomeController@index');
+        return response($comment, 200);
     }
 
     //BORRAR COMENTARIOS

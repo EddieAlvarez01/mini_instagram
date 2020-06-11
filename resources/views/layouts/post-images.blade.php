@@ -41,7 +41,18 @@
                                         <p class="text-muted">{{ FormatTime::relativeDate($image->created_at) }}</p>
                                     </div>
                                     <div class="reaction">
-                                        <a class="btn text-green"><i class="icon ion-thumbsup"></i> {{count($image->likes)}}</a>
+                                        @foreach($image->likes as $like)
+                                            @if($like->image_id == $image->id && $like->user_id == \Illuminate\Support\Facades\Auth::id())
+                                                <a class="btn text-green hand" id="btnLike" data-id="{{ $image->id }}"><i class="fa fa-thumbs-up"></i> {{ count($image->likes) }}</a>
+                                                <?php $isV = true; ?>
+                                                @break
+                                            @endif
+                                        @endforeach
+                                        @if(!isset($isV))
+                                            <a class="btn hand" id="btnLike" data-id="{{ $image->id }}"><i class="fa fa-thumbs-up"></i> {{ count($image->likes) }}</a>
+                                        @else
+                                            <?php unset($isV); ?>
+                                        @endif
                                     </div>
                                     <div class="line-divider"></div>
                                     <div class="post-text">
@@ -59,12 +70,12 @@
                                             <p><a href="timeline.html" class="profile-link">{{ $comment->user->nickname }} </a><i class="em em-laughing"></i>{{ $comment->content }}</p>
                                         </div>
                                     @endforeach
-                                    <form method="post" action="{{ action('CommentController@postComment') }}">
+                                    <form id="formComment">
                                         @csrf
                                         <div class="post-comment">
                                             <img src="{{ (\Illuminate\Support\Facades\Auth::user()->image != '') ? action('ImageController@getImage', ['path' => \Illuminate\Support\Facades\Auth::user()->image, 'option' => 1]) : asset('images/user.svg') }}" alt="" class="profile-photo-sm" />
                                             <input type="hidden" value="{{ $image->id }}" name="img_id">
-                                            <input type="text" name="content" class="form-control" placeholder="Escribe un comentario" required>
+                                            <input type="text" name="content" id="cleanInput" class="form-control" placeholder="Escribe un comentario" required>
                                             @error('content')
                                                 <strong class="error-validate">{{ $message }}</strong>
                                             @enderror

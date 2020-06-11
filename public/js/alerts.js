@@ -47,7 +47,7 @@ if(btnLike != null){
     for(let i=0; i < btnLike.length; i++){
         btnLike[i].addEventListener("click", () => {        //AÑADIR FUNCIONALIDAD A CADA UNO
             if(btnLike[i].classList.contains('text-green')){
-                axios.get(url + '/like/dislike-post/' + btnLike[i].dataset.id)   //PETICION HTTP
+                axios.get(url + '/like/dislike-post/' + btnLike[i].dataset.id)   //PETICION HTTP QUE QUITA EL LIKE
                 .then(function (response){
                     btnLike[i].classList.remove('text-green');
                     btnLike[i].innerHTML = '<i class="fa fa-thumbs-up"></i> ' +  (parseInt(btnLike[i].textContent) - 1); 
@@ -56,7 +56,7 @@ if(btnLike != null){
                     console.log(error);
                 });
             }else{
-                axios.get(url + '/like/like-post/' + btnLike[i].dataset.id)
+                axios.get(url + '/like/like-post/' + btnLike[i].dataset.id)     //PETICION HTTP QUE PONE EL LIKE
                 .then(function (response){
                     btnLike[i].classList.add('text-green');
                     btnLike[i].innerHTML = '<i class="fa fa-thumbs-up"></i> ' + (parseInt(btnLike[i].textContent) + 1); 
@@ -67,4 +67,24 @@ if(btnLike != null){
             }
         });
     }
+}
+
+//FORMULARIO DE COMENTARIOS
+let formComment = document.querySelector('#formComment');
+
+if(formComment != null){
+    formComment.addEventListener('submit', (event) => {   //EVENTO
+        event.preventDefault();     //EVITAR REFRESCO
+        var data = new FormData(formComment);                                     
+        axios.post(url + '/comment/create', data)    //PETICION HTTP QUE AÑADE UN NUEVO COMENTARIO
+            .then((response) => {
+                document.querySelector('#cleanInput').value = '';
+
+                //SI SE QUIERE REACTIVO DEBERIA CAPTURAR EL RESPONSE DE ACUERDO A LO QUE SU PLANTILLA MUESTRE Y GENERAR EL HTML DENTRO DEL ELEMENTO
+
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
 }

@@ -16,11 +16,15 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/my-images', 'HomeController@myImages')->name('home.myImages');
 
 //RUTAS DE EL USUSARIO
 Route::group(['prefix' => 'user'], function(){
     Route::get('show-edit', 'UserController@showEdit');
     Route::put('update-user', 'UserController@updateUser');
+    Route::get('show-profile/{id}', 'UserController@showProfile')->where([
+        'id' => '[0-9]+'
+    ]);
 });
 
 Route::get('/get-image/{path}/{option}', 'ImageController@getImage')->where([

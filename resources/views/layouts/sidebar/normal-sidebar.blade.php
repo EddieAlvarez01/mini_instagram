@@ -5,8 +5,8 @@
     </div><!--profile card ends-->
     <ul class="nav-news-feed">
         <li><i class="icon ion-home"></i><div><a href="{{ action('HomeController@index') }}">Inicio</a></div></li>
-        <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Mis imágenes</a></div></li>
-        <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">Mi perfil</a></div></li>
+        <li><i class="icon ion-images"></i><div><a href="{{ route('home.myImages') }}">Mis imágenes</a></div></li>
+        <li><i class="icon ion-ios-paper"></i><div><a href="{{ action('UserController@showProfile') }}">Mi perfil</a></div></li>
         <li><i class="icon ion-ios-settings"></i><div><a href="{{ action('UserController@showEdit') }}">Editar perfil</a></div></li>
         <li><i class="icon ion-ios-locked-outline"></i><div><a href="newsfeed-images.html">Cambiar contraseña</a></div></li>
         <li><i class="icon ion-ios-close-outline"></i><div><a id="btnLogout" href="#">Cerrar sesión</a></div></li>
