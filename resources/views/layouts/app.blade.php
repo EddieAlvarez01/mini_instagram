@@ -59,6 +59,11 @@
                 icon: 'success',
                 title: '{{ session('alert-success') }}'
             });
+        @elseif(session('alert-error'))
+            Toast.fire({
+                icon: 'error',
+                title: '{{ session('alert-error') }}'
+            });
         @endif
     </script>
 </body>

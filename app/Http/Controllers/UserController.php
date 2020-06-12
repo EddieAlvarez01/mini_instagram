@@ -6,6 +6,7 @@ use App\Image;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -107,6 +108,36 @@ class UserController extends Controller
         ];
         $images = Image::where('user_id', $id)->orderBy('created_at', 'desc')->paginate(6);
         return view('profile.about', ['image_p' => $image_p, 'information' => $information, 'images' => $images]);
+    }
+
+    //VISTA PARA CAMBIAR CONTRASEÑA
+    public function showChangePassword(){
+        $image_p = Auth::user()->image;
+        $information = [
+            'id' => Auth::id(),
+            'name' => Auth::user()->name . ' ' . Auth::user()->surname,
+            'nickname' => Auth::user()->nickname,
+            'email' => Auth::user()->email
+        ];
+        return view('profile.password', ['image_p' => $image_p, 'information' => $information]);
+    }
+
+    //CAMBIAR CONTRASEÑA DEL USUARIO
+    public function updatePassword(Request $req){
+        $req->validate([
+            'oldPassword' => ['required', 'string'],
+            'password' => ['required', 'string', 'confirmed']
+        ]);
+        $oldPassword = $req->input('oldPassword');
+        if(Hash::check($oldPassword, Auth::user()->password)){      //VERIFICAMOS EL MATCH DE LA CONTRASEÑA ECRIPTADA Y EL TEXTO PLANO
+            $user = User::find(Auth::id());                         //BUSCAMOS EL USUARIO
+            $pass = Hash::make($req->input('password'));        //ENCRIPTAMOS CONTRASEÑA
+            $user->password = $pass;
+            $user->save();                                          //SE GUARDAN LOS CAMBIOS
+            Auth::user()->password = Hash::make($pass);
+            return redirect()->action('UserController@showChangePassword')->with('alert-success', 'contraseña cambiada exitosamente');
+        }
+        return redirect()->back()->with('alert-error', 'Error la contraseña actual no es correcta');
     }
 
 }
