@@ -18,8 +18,15 @@ class UserController extends Controller
     //MOSTRAR FORMULARIO DE EDICIÓN DE DATOS DEL USUARIO
     public function showEdit(){
         $image_p = Auth::user()->image;     //VARIABLE PARA PASARLE UNA IMAGEN DEPENDIENDO DEL PERFIL O DEL MISMO USUARIO LOGEADO
+        $information = [
+            'id' => Auth::id(),
+            'name' => Auth::user()->name . ' ' . Auth::user()->surname,
+            'nickname' => Auth::user()->nickname,
+            'email' => Auth::user()->email
+        ];
         return view('profile.edit', [
-            'image_p' => $image_p
+            'image_p' => $image_p,
+            'information' => $information
         ]);
     }
 
@@ -72,11 +79,19 @@ class UserController extends Controller
                 'nickname' => Auth::user()->nickname,
                 'email' => Auth::user()->email
             ];
+            return view('profile.my', ['image_p' => $image_p, 'information' => $information]);
         }else{
             $user = User::find($id);
             $image_p = $user->image;
+            $information = [
+                'id' => $user->id,
+                'name' => $user->name . ' ' . $user->surname,
+                'nickname' => $user->nickname,
+                'email' => $user->email
+            ];
+            return view()
         }
-        return view('profile.my', ['image_p' => $image_p, 'information' => $information]);
+
     }
 
 }

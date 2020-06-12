@@ -22,7 +22,7 @@
                 <div class="user-info">
                     <img src="{{ ($image->user->image != '') ? action('ImageController@getImage', ['path' => $image->user->image, 'option' => 1]) : asset('images/user.svg') }}" alt="" class="profile-photo-sm pull-left" />
                     <div class="user">
-                        <h6><a href="#" class="profile-link">{{ $image->user->nickname }}</a></h6>
+                        <h6><a href="{{ action('UserController@showProfile', ['id' => $image->user->id]) }}" class="profile-link">{{ $image->user->nickname }}</a></h6>
                     </div>
                 </div>
             </div>

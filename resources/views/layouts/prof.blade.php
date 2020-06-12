@@ -10,8 +10,8 @@
                         <div class="col-md-3">
                             <div class="profile-info">
                                 <img src="{{ ($image_p == '') ? asset('images/user.svg') : action('ImageController@getImage', ['path' => $image_p, 'option' => 1]) }}" alt="" class="img-responsive profile-photo" />
-                                <h3>{{ \Illuminate\Support\Facades\Auth::user()->nickname }}</h3>
-                                <p class="text-muted">{{ \Illuminate\Support\Facades\Auth::user()->name . ' ' . \Illuminate\Support\Facades\Auth::user()->surname }}</p>
+                                <h3>{{ $information['nickname'] }}</h3>
+                                <p class="text-muted">{{ $information['name'] }}</p>
                             </div>
                         </div>
                         <div class="col-md-9">
