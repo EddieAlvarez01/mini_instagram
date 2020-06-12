@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,9 +90,23 @@ class UserController extends Controller
                 'nickname' => $user->nickname,
                 'email' => $user->email
             ];
-            return view()
+            $images = Image::where('user_id', $id)->orderBy('created_at', 'desc')->paginate(6);
         }
+        return view('profile.user', ['image_p' => $image_p, 'information' => $information, 'images' => $images]);
+    }
 
+    //INFORMACION DE PERFILES QUE NO SON DEL USUARIO
+    public function showAboutUser($id){
+        $user = User::find($id);
+        $image_p = $user->image;
+        $information = [
+            'id' => $user->id,
+            'name' => $user->name . ' ' . $user->surname,
+            'nickname' => $user->nickname,
+            'email' => $user->email
+        ];
+        $images = Image::where('user_id', $id)->orderBy('created_at', 'desc')->paginate(6);
+        return view('profile.about', ['image_p' => $image_p, 'information' => $information, 'images' => $images]);
     }
 
 }

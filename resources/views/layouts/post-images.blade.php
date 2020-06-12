@@ -37,7 +37,7 @@
                                 <img src="{{ ($image->user->image != '') ? action('ImageController@getImage', ['path' => $image->user->image, 'option' => 1]) : asset('images/user.svg') }}" alt="user" class="profile-photo-md pull-left" />
                                 <div class="post-detail">
                                     <div class="user-info">
-                                        <h5><a href="timeline.html" class="profile-link">{{ $image->user->name . ' ' . $image->user->surname }}</a></h5>
+                                        <h5><a href="{{ action('UserController@showProfile', ['id' => $image->user_id]) }}" class="profile-link">{{ $image->user->name . ' ' . $image->user->surname }}</a></h5>
                                         <p class="text-muted">{{ FormatTime::relativeDate($image->created_at) }}</p>
                                     </div>
                                     <div class="reaction">
@@ -67,7 +67,7 @@
                                                     <li><a href="{{ action('CommentController@deleteComment', ['id' => $comment->id]) }}"><i class="icon ion-ios-trash-outline"></i></a></li>
                                                 </ul>
                                             @endif
-                                            <p><a href="timeline.html" class="profile-link">{{ $comment->user->nickname }} </a><i class="em em-laughing"></i>{{ $comment->content }}</p>
+                                            <p><a href="{{ action('UserController@showProfile', ['id' => $comment->user_id]) }}" class="profile-link">{{ $comment->user->nickname }} </a><i class="em em-laughing"></i>{{ $comment->content }}</p>
                                         </div>
                                     @endforeach
                                     <form id="formComment">

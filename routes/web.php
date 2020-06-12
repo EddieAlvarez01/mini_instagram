@@ -25,6 +25,9 @@ Route::group(['prefix' => 'user'], function(){
     Route::get('show-profile/{id}', 'UserController@showProfile')->where([
         'id' => '[0-9]+'
     ]);
+    Route::get('show-profile-user/{id}', 'UserController@showAboutUser')->where([
+        'id' => '[0-9]+'
+    ]);
 });
 
 Route::get('/get-image/{path}/{option}', 'ImageController@getImage')->where([

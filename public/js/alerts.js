@@ -70,12 +70,12 @@ if(btnLike != null){
 }
 
 //FORMULARIO DE COMENTARIOS
-let formComment = document.querySelector('#formComment');
+let formComment = document.querySelectorAll('#formComment');
 
-if(formComment != null){
-    formComment.addEventListener('submit', (event) => {   //EVENTO
+for(let i = 0; i < formComment.length; i++){
+    formComment[i].addEventListener('submit', (event) => {   //EVENTO
         event.preventDefault();     //EVITAR REFRESCO
-        var data = new FormData(formComment);                                     
+        var data = new FormData(formComment[i]);                                     
         axios.post(url + '/comment/create', data)    //PETICION HTTP QUE AÑADE UN NUEVO COMENTARIO
             .then((response) => {
                 document.querySelector('#cleanInput').value = '';
