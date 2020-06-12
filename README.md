@@ -29,7 +29,7 @@ _Ejecutar:_
 php artisan key:generate
 ```
 
-_Crear en raiz_proyecto/storage/app/_
+_Crear en:   raiz_proyecto/storage/app/_
 
 ```
 mkdir users
@@ -44,6 +44,6 @@ mkdir images
 * MySql - Base de datos
 * CSS Y HTML - Estructuración y maquetacion de las paginas.
 * JavaScript - Interacción con el usuario en las paginas
-* [SwwetAlert2](https://sweetalert2.github.io/) - Libreria de js, alertas personalizadas
+* [SweetAlert2](https://sweetalert2.github.io/) - Libreria de js, alertas personalizadas
 * [Axios](https://github.com/axios/axios) - Peticiones http con js
 * [Moment.php](https://github.com/fightbulc/moment.php) - Manejo de fechas
