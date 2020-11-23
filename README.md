@@ -66,6 +66,12 @@ DB_USERNAME={username_mysql}
 DB_PASSWORD={password_mysql}
 ```
 
+Ver local
+
+```
+php artisan serve
+```
+
 ## Construido con 🛠️
 
 * PHP - Lenguaje de backend
