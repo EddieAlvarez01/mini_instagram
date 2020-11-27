@@ -1,0 +1,17 @@
+version: "3"
+services:
+  laravel-app:
+    build: .
+    container_name: mini_instagram
+    ports:
+      - "80:80"
+    links:
+      - mysql-db
+
+  mysql-db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: eddie123
+    ports:
+      - "3306:3306"
